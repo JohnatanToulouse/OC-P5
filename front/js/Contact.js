@@ -28,14 +28,26 @@ var emailErrorMsg = document.getElementById("emailErrorMsg");
 
 submitOrder.addEventListener("submit", function (e) {
   e.preventDefault();
-  var valid = true;
-  for (let input of document.querySelectorAll('.cart__order__form input')) {
-    valid = valid && input.reportValidity();
-    if (!valid) {
-      break;
-    }
-  }
-  if (valid) {
+
+
+ 
+
+/*
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+  //  var valid = true;
+  //  for (let input of document.querySelectorAll('.cart__order__form input')) {
+  //    valid = valid && input.reportValidity();
+  //  if (!valid) {
+  //    break;
+  //  }
+  //  }
+  //  if (valid) {
 
 
 
@@ -106,8 +118,9 @@ submitOrder.addEventListener("submit", function (e) {
 
 
 
-  }
+  //  }
 });
 
-
- 
+console.log(firstname);
+firstname = firstname.value;
+console.log(firstname);
