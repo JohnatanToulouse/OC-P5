@@ -121,6 +121,10 @@ submitOrder.addEventListener("submit", function (e) {
   //  }
 });
 
+
+/** >>> Poursuivre ici
 console.log(firstname);
 firstname = firstname.value;
 console.log(firstname);
+
+ */

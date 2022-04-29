@@ -54,13 +54,15 @@ function createArticleHtmlById(basket) {
                         <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${basket.qty}">
                       </div>
                       <div class="cart__item__content__settings__delete">
-                        <p class="deleteItem" onclick="deleteToBasket(${basket.id},${basket.colors});" id="coucou">Supprimer</p>
+                        <p class="deleteItem" onclick="deleteToBasket(${basket.id},${basket.colors})">Supprimer</p>
                       </div>
                     </div>
                   </div>
                 </article>`;
   cartClass[0].innerHTML = cardHtml;
 
+
+  console.log(cartClass)
 }
 
 
@@ -82,7 +84,7 @@ function getLocalStorage() {
         .then((resp) => resp.json())
         .then(function (data) {
          
-          // ICI - répétiton de l'appel   
+
           document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${data.colors}">
     <div class="cart__item__img">
       <img src="${data.imageUrl}" alt="${data.name}">
@@ -103,10 +105,10 @@ function getLocalStorage() {
         </div>
       </div>
     </div>
-          </article>`;
+  </article>`;
         });
 
-      // -- Affichage du pric total dans html.    
+
       let p__total__price = document.getElementById('totalPrice');
       p__total__price.textContent = basketClass.getTotalPrice();
    
@@ -128,4 +130,3 @@ getLocalStorage();
 function deleteToBasket(id,colors){
   console.log(id,colors);
 }
-

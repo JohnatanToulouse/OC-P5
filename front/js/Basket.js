@@ -16,7 +16,7 @@ class Basket{
        return basket;
     }
 
-    /* **/
+    /* TEST **/
     save(){
         localStorage.setItem("basket", JSON.stringify(this.produits));
         console.log("Produit ajouté à votre basket.");
@@ -106,7 +106,6 @@ class Basket{
             var totalProduit = parseInt(product.qty) * parseInt(price);
             total = total + totalProduit;
         }
-        console.log(total);
         document.getElementById('totalPrice').textContent = total;
     }
 
@@ -119,7 +118,7 @@ class Basket{
     }
 
 
-  
+    
 }
 
 
