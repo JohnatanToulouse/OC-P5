@@ -48,13 +48,10 @@ let panierBasket = localStorage.getItem("basket");
 /* - - - - - - - - - - - -- - - - - - -  Formulaire de contact  - - - - - -- - - - - - - - - - - - -  */  
 let submitOrder = document.forms.contact;
  
-
-
-
-
-
 submitOrder.addEventListener("submit", function (e) {
   e.preventDefault();
+
+  // recuperation des inputs du formulaire contact
   var firstname = document.forms["contact"]["firstName"];
   var lastname = document.forms["contact"]["lastName"];
   var address = document.forms["contact"]["address"];
@@ -67,16 +64,7 @@ submitOrder.addEventListener("submit", function (e) {
   var addressErrorMsg = document.getElementById("addressErrorMsg");
   var cityErrorMsg = document.getElementById("cityErrorMsg");
   var emailErrorMsg = document.getElementById("emailErrorMsg");
-  
-  
-
- 
-
-/* - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - - 
-/* - - - - - - - - - - - - - -- - - - - - - - - - - -  reportValidity - - - - - - - - - - - - - -
-/* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - -  */
-
- 
+   
 
   let firstnameF = firstname.value;
   let lastnameF = lastname.value; 
@@ -85,47 +73,9 @@ submitOrder.addEventListener("submit", function (e) {
   let emailF = email.value;
    
 
-    email.addEventListener("change", function(){
-      validEmail(this);
-    })
- 
+    
 
-   const validEmail = function(email)
-   {
-     /* A jusqu'a min maj + 0 à 9, ._- (plusieurs fois) */
-      let emailRegEx = new RegExp(
-        '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g'
-      );
-
-      let testEmail = emailRegEx.test(emailF);
-      console.log(testEmail)
-
-        
-        if(testEmail){
-          emailErrorMsg.innerHTML = `Merci de saisir un format d'email correct`;
-        }else{
-          emailErrorMsg.innerHTML = `OK`;
-        }
-
-         
-   };
-
-/*
-  if(firstname.value  == ""){
-    e.preventDefault();
-  }
-
-  console.log(firstname);
-  return false;
- /*
- firstName
-lastName
-address
-city
-email
-*/
-
-
+  
 
 
 
@@ -135,6 +85,35 @@ email
     /* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - */
 
 
+    /* --------------------- Ville --------------------- */   
+    let msgCityErr = "";
+     let villeRegEx = new RegExp(
+       '^[a-zA-Z]+$', 'g'
+     );
+      if(villeRegEx.test(cityF)){
+       city.style.border = "3px solid green";
+      }else{
+        city.style.border = "3px solid red";
+        let msgCityErr = "Merci d'indiquer une ville correctement";
+        cityErrorMsg.innerHTML = msgCityErr;
+      }
+
+
+    /* --------------------- Email --------------------- */   
+
+      /* A jusqu'a Z min maj + 0 à 9, ._- (plusieurs fois) */
+      let emailRegEx = new RegExp(
+        '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g'
+      );
+      if(emailRegEx.test(emailF)){
+        // Quoi mettre ici ? 
+        email.style.border = "3px solid green";
+      }else{
+        email.style.border = "3px solid red";
+        let msgEmailErr = "Merci d'indiquer un format d'email valide."; 
+        emailErrorMsg.innerHTML = msgEmailErr;
+        e.preventDefault();
+      }    
 
 
     // Object contact à envoyer
@@ -144,12 +123,8 @@ email
       address: address.value,
       city: city.value,
       email: email.value,
-
-
     }
 
-
-   
 
     // Boucle pour récupérer l'id du resultat parse de panierBasket
     for(const idVoulu of panierBasket){
@@ -160,12 +135,9 @@ email
     
 
     // Object dataP contenant l'object contact et le tableau products
-
     const dataP = {
       contact, products
     }
-
- 
 
     try {
       const prom1 = fetch("http://localhost:3000/api/products/order", {
@@ -180,21 +152,16 @@ email
           console.log(response);
           const contenu = await response.json();
           console.log(contenu);
-           window.location.href = `confirmation.html?orderId=${contenu.orderId}`;
+          // redirection url avec orderId passé en valeur dans l'url
+          // window.location.href = `confirmation.html?orderId=${contenu.orderId}`;
         } catch (e) {
           console.log(e);
         }
       })
-
-
     } catch (err) {
       alert(err);
     }
 
-
-
-
-  //  }
 });
 
  
