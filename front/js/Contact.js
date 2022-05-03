@@ -72,21 +72,38 @@ submitOrder.addEventListener("submit", function (e) {
   let cityF = city.value;
   let emailF = email.value;
    
-
-    
-
-  
-
-
-
-
     /* - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - 
     /* - -- - - - -- - - - - - - - - - - - - - - - - - -  RegEx - -- - - - - - - - - - - -
     /* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - */
 
   /* --------------------- Prenom --------------------- */ 
+  let msgFirstnameErr = "";
+  let firstnameRegEx = new RegExp(
+   `^[a-z]([-']?[a-z]+)*([a-z]([-']?[a-z]+)*)+$`
+  );
+  if(firstnameRegEx.test(firstnameF)){
+    firstname.style.border = "3px solid green";
+    firstnameErrorMsg.innerText = "";
+  }else{
+    firstname.style.border = "3px solid red";
+    msgFirstnameErr = "Merci de renseigner prénom valide.";
+    firstnameErrorMsg.innerHTML = msgFirstnameErr;
+  }  
+
   /* ----------------------- Nom ----------------------- */ 
     let msgLastNameErr = "";
+
+  let lastnameRegEx = new RegExp(
+   `^[a-z]([-']?[a-z]+)*([a-z]([-']?[a-z]+)*)+$`
+  );
+  if(lastnameRegEx.test(lastnameF)){
+    lastname.style.border = "3px solid green";
+    lastNameErrorMsg.innerText = "";
+  }else{
+    lastname.style.border = "3px solid red";
+    msgLastNameErr = "Merci de renseigner prénom valide.";
+    lastNameErrorMsg.innerHTML = msgLastNameErr;
+  } 
     
 
   /* ----------------------- Adresse ----------------------- */ 
@@ -123,7 +140,7 @@ submitOrder.addEventListener("submit", function (e) {
 
       /* A jusqu'a Z min maj + 0 à 9, ._- (plusieurs fois) */
       let emailRegEx = new RegExp(
-        '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g'
+        '^[a-z0-9.-_]+[@]{1}[a-z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g'
       );
       if(emailRegEx.test(emailF)){
         // Quoi mettre ici ? 
