@@ -84,6 +84,25 @@ submitOrder.addEventListener("submit", function (e) {
     /* - -- - - - -- - - - - - - - - - - - - - - - - - -  RegEx - -- - - - - - - - - - - -
     /* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - */
 
+  /* --------------------- Prenom --------------------- */ 
+  /* ----------------------- Nom ----------------------- */ 
+    let msgLastNameErr = "";
+    
+
+  /* ----------------------- Adresse ----------------------- */ 
+    let msgAddressErr = "";
+    let addressRegEx = new RegExp(
+     `[A-Za-z0-9'\.\-\s\,]`
+    );
+    if(addressRegEx.test(addressF)){
+      address.style.border = "3px solid green";
+      addressErrorMsg.innerText = "";
+       
+    }else{
+      address.style.border = "3px solid red";
+      msgAddressErr = "Merci de renseigner un format d'adresse valide.";
+      addressErrorMsg.innerHTML = msgAddressErr;
+    }  
 
     /* --------------------- Ville --------------------- */   
     let msgCityErr = "";
@@ -92,9 +111,10 @@ submitOrder.addEventListener("submit", function (e) {
      );
       if(villeRegEx.test(cityF)){
        city.style.border = "3px solid green";
+       cityErrorMsg.innerText = "";
       }else{
         city.style.border = "3px solid red";
-        let msgCityErr = "Merci d'indiquer une ville correctement";
+        msgCityErr = "Merci d'indiquer une ville correctement.";
         cityErrorMsg.innerHTML = msgCityErr;
       }
 
@@ -108,6 +128,7 @@ submitOrder.addEventListener("submit", function (e) {
       if(emailRegEx.test(emailF)){
         // Quoi mettre ici ? 
         email.style.border = "3px solid green";
+        emailErrorMsg.innerText = "";
       }else{
         email.style.border = "3px solid red";
         let msgEmailErr = "Merci d'indiquer un format d'email valide."; 
