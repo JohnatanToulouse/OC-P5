@@ -34,16 +34,27 @@ let panierBasket = localStorage.getItem("basket");
               <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${itemProduct.qty}">
             </div>
             <div class="cart__item__content__settings__delete">
-              <p class="deleteItem">Supprimer</p>
+              <p class="deleteItem" onclick=deleteItemToBasket('${data._id}','${itemProduct.colors}')>Supprimer</p>
             </div>
           </div>
         </div>
       </article>`;
       });
-      
+      var classBasket = new Basket();
+    classBasket.getTotalPrice();
       
        
   }
+
+/* - - - - - - - - - - - -- - - - - - - Delete - - - - - - - - - - - -- - - - - - - */
+  function deleteItemToBasket(id, color) {
+    console.log(id, color);
+    var classBasket = new Basket();
+    //classBasket.remove({ id, color });
+    classBasket.remove({ id});
+    document.querySelector("article[data-id=" + id + "]").remove();
+  }
+
  
 /* - - - - - - - - - - - -- - - - - - -  Formulaire de contact  - - - - - -- - - - - - - - - - - - -  */  
 let submitOrder = document.forms.contact;
@@ -65,7 +76,7 @@ submitOrder.addEventListener("submit", function (e) {
   var cityErrorMsg = document.getElementById("cityErrorMsg");
   var emailErrorMsg = document.getElementById("emailErrorMsg");
    
-
+  // récupérer la value des inputs
   let firstnameF = firstname.value;
   let lastnameF = lastname.value; 
   let addressF = address.value;
