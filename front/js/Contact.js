@@ -31,7 +31,7 @@ let panierBasket = localStorage.getItem("basket");
           <div class="cart__item__content__settings">
             <div class="cart__item__content__settings__quantity">
               <p>Qté : </p>
-              <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${itemProduct.qty}">
+              <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" onclick=updateItemQty('${data._id}','${itemProduct.qty}') value="${itemProduct.qty}">
             </div>
             <div class="cart__item__content__settings__delete">
               <p class="deleteItem" onclick=deleteItemToBasket('${data._id}','${itemProduct.colors}')>Supprimer</p>
@@ -55,6 +55,20 @@ let panierBasket = localStorage.getItem("basket");
     document.querySelector("article[data-id=" + id + "]").remove();
   }
 
+
+
+/* - - - - - - - - - - - -- - - - - - - Update Qty  - - - - - - - - - - - -- - - - - - - */
+
+function updateItemQty(id, qty = 1){
+  console.log(id);
+  var classBasket = new Basket();
+  classBasket.changeQuantity({id,qty});
+  
+
+
+}
+/*var ok = document.querySelector('input[name="itemQuantity"]' + id + ']');
+console.log(ok)*/
  
 /* - - - - - - - - - - - -- - - - - - -  Formulaire de contact  - - - - - -- - - - - - - - - - - - -  */  
 let submitOrder = document.forms.contact;
