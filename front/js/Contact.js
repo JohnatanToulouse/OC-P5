@@ -80,8 +80,7 @@ function updateItemQty(id, color){
 
 
 }
-/*var ok = document.querySelector('input[name="itemQuantity"]' + id + ']');
-console.log(ok)*/
+ 
  
 /* - - - - - - - - - - - -- - - - - - -  Formulaire de contact  - - - - - -- - - - - - - - - - - - -  */  
 let submitOrder = document.forms.contact;

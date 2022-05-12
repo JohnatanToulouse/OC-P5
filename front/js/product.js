@@ -8,14 +8,9 @@ let search_articleId = new URL(location.href).searchParams.get("id");
 
 let btnBasket = document.getElementById('addToCart');
 
-console.log(new Basket());
 
 var panier = new Basket();
-/* Répétitions ? 
-var title = document.getElementById("title");
-var price = document.getElementById("price");
-var description = document.getElementById("description");
-*/
+
 
 // En arrivant 
 // affichage d'un produit par id
@@ -25,13 +20,6 @@ fetch("http://localhost:3000/api/products/" + search_articleId)
    showCanapeById(data);
   });
 
-
-// functions:
-
-// Récupère le panier
-/**function getBasket(){
-   return JSON.parse(localStorage.getItem("panier"));
-}*/
 
 // Afiche les détails d'un canapé clické
 function showCanapeById(canapeId) {
@@ -96,7 +84,7 @@ for (const color of nbColors) {
       priceHtml.append(price);
       descriptionHtml.append(description);
 
-      /** getElementsByClassName, utilisé la syntaxe pour tableau */
+      
       imgHtml[0].appendChild(img)
 
 }
@@ -108,7 +96,7 @@ for (const color of nbColors) {
  btnAddToBasket = document.getElementById('addToCart');
  
 
- //Click sur le button "ajouter au panier", la fonction saveBasket est appelé pour l'ajour au panier.
+ // Click sur le button "ajouter au panier", la fonction saveBasket est appelé pour l'ajour au panier.
  btnAddToBasket.addEventListener('click', function(){
 // verification qty
 

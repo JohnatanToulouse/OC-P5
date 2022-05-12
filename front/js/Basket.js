@@ -16,19 +16,19 @@ class Basket {
         return basket;
     }
 
-    /* TEST **/
+    
     save() {
         localStorage.setItem("basket", JSON.stringify(this.produits));
         console.log("Produit ajouté à votre basket.");
     }
-    /* **/
+    
 
     add(produitCanape) {
 
 
         // verification(s)
         if (produitCanape.qty == 0 && produitCanape.colors == "") {
-            console.log("Veuillez sélectionnez une quantité et une couleur.");
+            alert("Veuillez sélectionnez une quantité et une couleur.");
         } else {
             // verification(s) ID - même article
             // Recherche le meme ID sur le produitCanape qui vient d'être soumis à l'ajout du panier
@@ -43,24 +43,21 @@ class Basket {
                 // Sinon on l'ajour normalement au panier
                 this.produits.push(produitCanape)
             }
-            // ajoute avec .push le produit
-
-            //console.log(this.produits)
-
-            // sauvegarde dans le panier avec la methode "saveBasket"
+            
+            // sauvegarde dans le panier avec la methode "save"
             this.save();
             window.location.href = 'cart.html';
         }
 
     }
 
-
+    /**     
     saveProduit(produit) {
         let produits = JSON.parse(localStorage.getItem("basket")) || [];
         produits = [...produits, produit];
         localStorage.setItem("basket", JSON.stringify(produits));
     }
-
+    */
 
     remove(produitCanape) {
 
@@ -82,10 +79,6 @@ class Basket {
         }
         this.getTotalPrice();
         this.getTotalProduct();
-
-
-       
-
     }
 
     getNumberProduct() {
