@@ -18,7 +18,7 @@ let panierBasket = localStorage.getItem("basket");
    fetch(url)
       .then((resp) => resp.json())
       .then(function (data) {
-        document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${data.colors}">
+        document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${itemProduct.colors}">
         <div class="cart__item__img">
           <img src="${data.imageUrl}" alt="${data.name}">
         </div>
@@ -31,7 +31,7 @@ let panierBasket = localStorage.getItem("basket");
           <div class="cart__item__content__settings">
             <div class="cart__item__content__settings__quantity">
               <p>Qté : </p>
-              <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" onclick=updateItemQty('${data._id}','${itemProduct.qty}') value="${itemProduct.qty}">
+              <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" onclick=updateItemQty('${data._id}','${itemProduct.colors}') value="${itemProduct.qty}">
             </div>
             <div class="cart__item__content__settings__delete">
               <p class="deleteItem" onclick=deleteItemToBasket('${data._id}','${itemProduct.colors}')>Supprimer</p>
@@ -41,8 +41,8 @@ let panierBasket = localStorage.getItem("basket");
       </article>`;
       });
       var classBasket = new Basket();
-    classBasket.getTotalPrice();
-      
+      classBasket.getTotalPrice();
+      classBasket.getTotalProduct();
        
   }
 
@@ -50,19 +50,32 @@ let panierBasket = localStorage.getItem("basket");
   function deleteItemToBasket(id, color) {
     console.log(id, color);
     var classBasket = new Basket();
-    //classBasket.remove({ id, color });
-    classBasket.remove({ id});
-    document.querySelector("article[data-id=" + id + "]").remove();
+    classBasket.remove({ id, color });
+    //classBasket.remove({ id});
+    document.querySelector('article[data-id="' + id + '"]').remove();
+    classBasket.getTotalPrice();
   }
 
 
 
 /* - - - - - - - - - - - -- - - - - - - Update Qty  - - - - - - - - - - - -- - - - - - - */
 
-function updateItemQty(id, qty = 1){
-  console.log(id);
-  var classBasket = new Basket();
-  classBasket.changeQuantity({id,qty});
+
+function updateItemQty(id, color){
+  var baliseArticle = document.querySelectorAll('article');
+
+  for (const article of baliseArticle) {
+    if(article.attributes.getNamedItem('data-id').value == id && article.attributes.getNamedItem('data-color').value == color){
+     var quantityInput = article.querySelector('input').value;
+     
+    }
+  }
+ 
+ 
+
+  
+  var basketQty = new Basket();
+  basketQty.changeQuantity(id, quantityInput, color);
   
 
 

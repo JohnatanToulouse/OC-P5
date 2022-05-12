@@ -71,24 +71,20 @@ class Basket {
 
     }
 
-    changeQuantity(produitCanape, quantity) {
-
+    changeQuantity(id, quantity, color) {
+        console.log(id, quantity, color);
         // Recherche le meme ID sur le produitCanape qui vient d'être soumis à l'ajout du panier
-        let foundProduct = this.produits.find(p => p.id == produitCanape.id);
+        let foundProduct = this.produits.find(p => p.id == id && p.colors == color);
+        console.log(foundProduct);
         if (foundProduct != undefined) {
-            foundProduct.quantity += quantity;
-            if (foundProduct.quantity <= 0) {
-                remove(foundProduct);
-            } else {
-                this.save()
-            }
+            foundProduct.qty = quantity;
+            this.save();
         }
+        this.getTotalPrice();
+        this.getTotalProduct();
 
-        qtyBtn = document.getElementsByClassName("itemQuantity");
-        
-        qtyBtn.addEventListener("change", function(){
-            console.log("hello")
-        }); 
+
+       
 
     }
 
@@ -111,6 +107,18 @@ class Basket {
         }
         document.getElementById('totalPrice').textContent = total;
     }
+
+
+    getTotalProduct() {
+
+        let total = 0;
+        for (let product of this.produits) {
+            total += parseInt(product.qty);
+        }
+        document.getElementById('totalQuantity').textContent = total;
+    }
+
+
 
     getPriceByApi(id) {
         return fetch('http://localhost:3000/api/products/' + id)
