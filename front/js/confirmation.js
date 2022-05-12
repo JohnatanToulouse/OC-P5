@@ -9,3 +9,7 @@ let confirmationHtml = document.querySelector('.confirmation span');
 
 // intégration dans l'html de la value de orderIdUrl
 confirmationHtml.textContent = orderIdUrl;
+
+// effacement du localStorage "basket"
+localStorage.clear("basket");
+

@@ -53,24 +53,14 @@ class Basket {
             this.save();
             window.location.href = 'cart.html';
         }
-
     }
 
-    /**     
-    saveProduit(produit) {
-        let produits = JSON.parse(localStorage.getItem("basket")) || [];
-        produits = [...produits, produit];
-        localStorage.setItem("basket", JSON.stringify(produits));
-    }
-    */
+
 
     remove(produitCanape) {
 
         this.produits = this.produits.filter(p => p.id != produitCanape.id && p.colors != produitCanape.colors);
         this.save();
-
-
-
     }
 
     changeQuantity(id, quantity, color) {
@@ -124,6 +114,12 @@ class Basket {
             .then(function (data) {
                 return data.price;
             })
+    }
+
+
+    getDestroy(){
+        let basket = localStorage.getItem("basket");
+        basket.clear();
     }
 
 }

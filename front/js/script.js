@@ -6,7 +6,7 @@
  
 
 // functions:
-// affichages de tous les 
+// affichages de tous les canapés
 function showCanapes(canape){
      // créé un element lien 
      let elemA = document.createElement('a');
@@ -71,7 +71,7 @@ function showCanapes(canape){
 }
 
 
-
+// Lancement direct appel tous les produits
 (function(){
    fetch(url)
    .then((resp) => resp.json())

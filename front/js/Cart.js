@@ -33,11 +33,21 @@ function afficherPanierVide() {
 }
 
 /* ********* Fonction pour afficher un article du panier du localStorage - Ancien - Ne Pas Effacer ********* **/
-function createArticleHtmlById(basket) {
+/*function createArticleHtmlById(basket) {
   console.log("ici")
   let cartClass = document.getElementsByClassName('cart');
 
-  let cardHtml = `
+  // create card block 
+
+
+  let cardHtml = document.createElement("div")
+
+
+
+  console.log(cardHtml);
+  return false;
+
+  let cardHtml2 = `
   <article class="cart__item" data-id="${basket.id}" data-color="${basket.colors}">
                   <div class="cart__item__img">
                     <img src="${basket.imageUrl}" alt="${basket.name}">
@@ -62,7 +72,7 @@ function createArticleHtmlById(basket) {
   cartClass[0].innerHTML = cardHtml;
 
  
-}
+} */
 
 
 

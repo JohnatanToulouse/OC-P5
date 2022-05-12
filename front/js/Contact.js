@@ -51,7 +51,7 @@ let panierBasket = localStorage.getItem("basket");
     console.log(id, color);
     var classBasket = new Basket();
     classBasket.remove({ id, color });
-    //classBasket.remove({ id});
+   
     document.querySelector('article[data-id="' + id + '"]').remove();
     classBasket.getTotalPrice();
   }
@@ -187,7 +187,7 @@ submitOrder.addEventListener("submit", function (e) {
         email.style.border = "3px solid red";
         let msgEmailErr = "Merci d'indiquer un format d'email valide."; 
         emailErrorMsg.innerHTML = msgEmailErr;
-        e.preventDefault();
+       
       }    
 
 
@@ -200,15 +200,12 @@ submitOrder.addEventListener("submit", function (e) {
       email: email.value,
     }
 
-
     // Boucle pour récupérer l'id du resultat parse de panierBasket
     for(const idVoulu of panierBasket){
       // Ajout de la clé/valeur dans tableau
        products.push(idVoulu.id);
     }
   
-    
-
     // Object dataP contenant l'object contact et le tableau products
     const dataP = {
       contact, products
@@ -224,11 +221,11 @@ submitOrder.addEventListener("submit", function (e) {
       });
       prom1.then(async (response) => {
         try {
-          console.log(response);
+          
           const contenu = await response.json();
-          console.log(contenu);
+          
           // redirection url avec orderId passé en valeur dans l'url
-          // window.location.href = `confirmation.html?orderId=${contenu.orderId}`;
+           window.location.href = `confirmation.html?orderId=${contenu.orderId}`;
         } catch (e) {
           console.log(e);
         }
@@ -244,13 +241,12 @@ submitOrder.addEventListener("submit", function (e) {
 
 
 
-/* - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - - 
-/* - - - - - - - - - - - - - -- - - - - - - - - - - -  .deleteItem - - - - - - - - - - - - - -
-/* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - -  */
+/* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - - - - - - - -
+/* - - - - - - - - - - - - - - - - - - .deleteItem - - - - - - - - - - - - - - - - - - - - - - - - - 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
 const btnDeletes = document.querySelectorAll('.deleteItem');
-      
-      for( let i = 0;i < btnDeletes.length; i++){
+  for( let i = 0;i < btnDeletes.length; i++){
         console.log("Hello dear")
-      }
+  }
       
