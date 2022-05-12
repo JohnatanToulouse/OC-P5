@@ -11,6 +11,13 @@ let btnBasket = document.getElementById('addToCart');
 
 var panier = new Basket();
 
+let titlePage = document.getElementsByTagName("title")[0];
+
+
+
+
+
+
 
 // En arrivant 
 // affichage d'un produit par id
@@ -23,7 +30,13 @@ fetch("http://localhost:3000/api/products/" + search_articleId)
 
 // Afiche les détails d'un canapé clické
 function showCanapeById(canapeId) {
- 
+   
+   // Affichage du produit dans la balise title de la page, avec petite customisation.
+
+   let titleHtmlPage = document.createTextNode(`${canapeId.name}`+" —— Kanap");
+   titlePage.appendChild(titleHtmlPage)
+   
+
 // Name
 let nameTitle = `${canapeId.name}`;
  
