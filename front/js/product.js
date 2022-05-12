@@ -8,14 +8,9 @@ let search_articleId = new URL(location.href).searchParams.get("id");
 
 let btnBasket = document.getElementById('addToCart');
 
-
 var panier = new Basket();
 
 let titlePage = document.getElementsByTagName("title")[0];
-
-
-
-
 
 
 
@@ -33,8 +28,8 @@ function showCanapeById(canapeId) {
    
    // Affichage du produit dans la balise title de la page, avec petite customisation.
 
-   let titleHtmlPage = document.createTextNode(`${canapeId.name}`+" —— Kanap");
-   titlePage.appendChild(titleHtmlPage)
+let titleHtmlPage = document.createTextNode(`${canapeId.name}`+" —— Kanap");
+titlePage.appendChild(titleHtmlPage)
    
 
 // Name
@@ -105,20 +100,20 @@ for (const color of nbColors) {
  
  
 
- /* Récuperer le button */
+ /* récupération du button */
  btnAddToBasket = document.getElementById('addToCart');
  
 
- // Click sur le button "ajouter au panier", la fonction saveBasket est appelé pour l'ajour au panier.
+ // Click sur le button "ajouter au panier", la fonction add est appelé pour l'ajour au panier.
  btnAddToBasket.addEventListener('click', function(){
-// verification qty
+
 
      const canapeCommander = {
         "id": search_articleId,
         "qty" : document.getElementById('quantity').value,
         "colors" : document.getElementById('colors').value
      }
-     // saveBasket(canapeCommander)
+      
      panier.add(canapeCommander)
  });
  

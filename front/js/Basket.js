@@ -27,10 +27,14 @@ class Basket {
 
 
         // verification(s)
-        if (produitCanape.qty == 0 && produitCanape.colors == "") {
-            alert("Veuillez sélectionnez une quantité et une couleur.");
+        if (produitCanape.qty == 0 ) {
+            alert("Veuillez sélectionnez une quantité.");
 
-        } else {
+        }else if(produitCanape.colors == "")
+        {
+            alert("Veuillez une couleur.");
+        }
+        else {
             // verification(s) ID - même article
             // Recherche le meme ID sur le produitCanape qui vient d'être soumis à l'ajout du panier
             let foundProduct =
