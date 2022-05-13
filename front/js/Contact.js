@@ -1,23 +1,72 @@
-/* - - - - - - - - - - - -- - - - - - -  Affichage du localStorage  - - - - - -- - - - - - - - - - - - -  */
-/* - - - - - - - - - - - -- - - - - - -- - -  Afficher dans .cart  -- - - - - - - -- - - - - - - - - - -  */
- // Initialisation d'un tableau vide
- let products = [];
+let cartHtml = document.getElementsByClassName('cart');
 
-let panierBasket = localStorage.getItem("basket");
- panierBasket = JSON.parse(panierBasket);
 
- for (let itemProduct of panierBasket) {
 
-  let idUrl = itemProduct.id;
+function displayItemProduct(data){
+  console.log(data)
 
+  let containerCard = document.createElement("div");
+  containerCard.setAttribute("data-id", `${data._id}`)
+  containerCard.classList.add("cart__item");
+  containerCard.setAttribute("data-color", `${data.colors}`);
+
+  let cardImg = document.createElement("div");
+  cardImg.classList.add("cart__item__img");
   
+  let imgCardItemProduct = document.createElement("img");
+  imgCardItemProduct.setAttribute("alt", `${data.name}`);
+  imgCardItemProduct.src = `${data.imageUrl}`;
 
-  const url = "http://localhost:3000/api/products/" + idUrl;
+  cardImg.appendChild(imgCardItemProduct);
+
+  containerCard.appendChild(cardImg);
+
+  let cardItemContent = document.createElement("div");
+  cardItemContent.classList.add("cart__item__content");
+
+  let cardItemContentDescription = document.createElement("div");
+  cardItemContentDescription.classList.add("cart__item__content__description");
+
+  let h2CardItem = document.createElement("h2");
+  let h2CardItemContent = document.createTextNode(`${data.name}`);
+
+  h2CardItem.appendChild(h2CardItemContent);
+
+  let pCardItem = document.createElement("p");
+  let pCardItemContent = document.createTextNode(`${data.colors}`);
 
 
-   fetch(url)
-      .then((resp) => resp.json())
-      .then(function (data) {
+  let pPrice = document.createElement("p");
+  let pPriceContent = document.createTextNode(`${data.price}  €`);
+
+  pCardItem.appendChild(pCardItemContent);
+
+
+  cardItemContentDescription.appendChild(h2CardItem);
+  cardItemContentDescription.appendChild(pCardItemContent);
+
+
+  cardItemContent.appendChild(cardItemContentDescription);
+
+
+
+  let cardItemContentSettings = document.createElement("div");
+  let cardItemContentSettingsQty = document.createElement("div");
+
+  let pCardItemContentSettingsQty = document.createElement("p");
+  let pCardItemContentSettingsQtyContent = document.createTextNode(`Qté :`);
+
+  let inputCardItemContentSettings = document.createElement("input");
+  inputCardItemContentSettings.setAttribute("type", "number");
+  inputCardItemContentSettings.setAttribute("name", "itemQuantity");
+  inputCardItemContentSettings.setAttribute("min", "1");
+  inputCardItemContentSettings.setAttribute("max", "100");
+  inputCardItemContentSettings.setAttribute("value", `${data.qty}`);
+  inputCardItemContentSettings.classList.add("itemQuantity");
+
+
+  cardItemContentSettings.appendChild(cardItemContentSettingsQty);
+ /*
         document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${itemProduct.colors}">
         <div class="cart__item__img">
           <img src="${data.imageUrl}" alt="${data.name}">
@@ -38,7 +87,48 @@ let panierBasket = localStorage.getItem("basket");
             </div>
           </div>
         </div>
-      </article>`;
+      </article>`; */
+
+
+  console.log(containerCard)
+
+  cartHtml[0].appendChild(containerCard);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* - - - - - - - - - - - -- - - - - - -  Affichage du localStorage  - - - - - -- - - - - - - - - - - - -  */
+/* - - - - - - - - - - - -- - - - - - -- - -  Afficher dans .cart  -- - - - - - - -- - - - - - - - - - -  */
+ // Initialisation d'un tableau vide
+ let products = [];
+
+let panierBasket = localStorage.getItem("basket");
+ panierBasket = JSON.parse(panierBasket);
+
+ for (let itemProduct of panierBasket) {
+
+  let idUrl = itemProduct.id;
+
+  
+
+  const url = "http://localhost:3000/api/products/" + idUrl;
+
+
+   fetch(url)
+      .then((resp) => resp.json())
+      .then(function (data) {
+        displayItemProduct(data)  
+
       });
       var classBasket = new Basket();
       classBasket.getTotalPrice();
@@ -109,9 +199,9 @@ submitOrder.addEventListener("submit", function (e) {
   let cityF = city.value;
   let emailF = email.value;
    
-    /* - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - 
-    /* - -- - - - -- - - - - - - - - - - - - - - - - - -  RegEx - -- - - - - - - - - - - -
-    /* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - -- - - - - - - - - - - - */
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - -  RegEx - - - - - - - - - - - - - - - - - - - 
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
   /* --------------------- Prenom --------------------- */ 
   let msgFirstnameErr = "";
