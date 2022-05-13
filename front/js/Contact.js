@@ -3,7 +3,7 @@ let cartHtml = document.getElementsByClassName('cart');
 
 
 function displayItemProduct(data){
-  console.log(data)
+  // console.log(data)
 
   let containerCard = document.createElement("div");
   containerCard.setAttribute("data-id", `${data._id}`)
@@ -48,7 +48,7 @@ function displayItemProduct(data){
 
   cardItemContent.appendChild(cardItemContentDescription);
 
-
+  containerCard.appendChild(cardItemContent)
 
   let cardItemContentSettings = document.createElement("div");
   let cardItemContentSettingsQty = document.createElement("div");
@@ -66,6 +66,11 @@ function displayItemProduct(data){
 
 
   cardItemContentSettings.appendChild(cardItemContentSettingsQty);
+
+  containerCard.appendChild(cardItemContentSettings)
+
+
+  
  /*
         document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${itemProduct.colors}">
         <div class="cart__item__img">
