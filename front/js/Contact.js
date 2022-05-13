@@ -4,6 +4,9 @@ let cartHtml = document.getElementsByClassName('cart');
 
 function displayItemProduct(data){
   console.log(data)
+ 
+
+  // boucle ? 
 
   let containerCard = document.createElement("article");
   containerCard.setAttribute("data-id", `${data._id}`)
@@ -84,7 +87,7 @@ function displayItemProduct(data){
   containerCard.appendChild(cardItemContentSettings)
   containerCard.appendChild(cardItemContentSettingsDelete)
 
-
+ 
 
  /*
         document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${itemProduct.colors}">
@@ -107,11 +110,11 @@ function displayItemProduct(data){
             </div>
           </div>
         </div>
-      </article>`; */
-
+      </article>`;
+*/
 
   
-  cartHtml[0].appendChild(containerCard);
+  cartHtml[0].appendChild(containerCard); 
 
 }
 
