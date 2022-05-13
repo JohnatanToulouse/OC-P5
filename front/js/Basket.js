@@ -61,6 +61,8 @@ class Basket {
 
         this.produits = this.produits.filter(p => p.id != produitCanape.id && p.colors != produitCanape.colors);
         this.save();
+        this.getTotalPrice();
+        this.getTotalProduct();
     }
 
     changeQuantity(id, quantity, color) {
