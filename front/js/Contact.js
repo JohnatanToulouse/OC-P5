@@ -3,9 +3,9 @@ let cartHtml = document.getElementsByClassName('cart');
 
 
 function displayItemProduct(data){
-  // console.log(data)
+  console.log(data)
 
-  let containerCard = document.createElement("div");
+  let containerCard = document.createElement("article");
   containerCard.setAttribute("data-id", `${data._id}`)
   containerCard.classList.add("cart__item");
   containerCard.setAttribute("data-color", `${data.colors}`);
@@ -65,12 +65,27 @@ function displayItemProduct(data){
   inputCardItemContentSettings.classList.add("itemQuantity");
 
 
+  let cardItemContentSettingsDelete = document.createElement("div");
+  cardItemContentSettingsDelete.classList.add("cart__item__content__settings__delete");
+
+
+  let pCardItemContentSettingsDelete = document.createElement("p");
+  pCardItemContentSettingsDelete.classList.add("deleteItem");
+  pCardItemContentSettingsDeleteContent = document.createTextNode("Supprimer");
+  
+
+  pCardItemContentSettingsDelete.appendChild(pCardItemContentSettingsDeleteContent);
+
+  cardItemContentSettingsDelete.appendChild(pCardItemContentSettingsDelete);
+
   cardItemContentSettings.appendChild(cardItemContentSettingsQty);
+  cardItemContentSettings.appendChild(inputCardItemContentSettings);
 
   containerCard.appendChild(cardItemContentSettings)
+  containerCard.appendChild(cardItemContentSettingsDelete)
 
 
-  
+
  /*
         document.querySelector(".cart").innerHTML += `<article class="cart__item" data-id="${data._id}" data-color="${itemProduct.colors}">
         <div class="cart__item__img">
@@ -95,8 +110,7 @@ function displayItemProduct(data){
       </article>`; */
 
 
-  console.log(containerCard)
-
+  
   cartHtml[0].appendChild(containerCard);
 
 }
