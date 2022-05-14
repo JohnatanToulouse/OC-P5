@@ -26,8 +26,7 @@ fetch("http://localhost:3000/api/products/" + search_articleId)
 // Afiche les détails d'un canapé clické
 function showCanapeById(canapeId) {
    
-   // Affichage du produit dans la balise title de la page, avec petite customisation.
-
+// Affichage du produit dans la balise title de la page, avec petite customisation.
 let titleHtmlPage = document.createTextNode(`${canapeId.name}`+" —— Kanap");
 titlePage.appendChild(titleHtmlPage)
    
@@ -107,7 +106,7 @@ for (const color of nbColors) {
  // Click sur le button "ajouter au panier", la fonction add est appelé pour l'ajour au panier.
  btnAddToBasket.addEventListener('click', function(){
 
-
+   
      const canapeCommander = {
         "id": search_articleId,
         "qty" : document.getElementById('quantity').value,

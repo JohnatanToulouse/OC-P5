@@ -3,6 +3,7 @@ class Basket {
         this.produits = this.getBasket()
     }
 
+    /* Afficher le localStorage */
     getBasket() {
         let basket = localStorage.getItem("basket");
         // Si panier est vide alors on renvoie un tableau vide []
@@ -16,16 +17,14 @@ class Basket {
         return basket;
     }
 
-    
+    /* Sauvegarder un produit dans le localStorage */
     save() {
         localStorage.setItem("basket", JSON.stringify(this.produits));
         console.log("Produit ajouté à votre basket.");
     }
-    
 
+    /* Ajouter un produit au panier */
     add(produitCanape) {
-
-
         // verification(s)
         if (produitCanape.qty == 0 ) {
             alert("Veuillez sélectionnez une quantité.");
@@ -55,16 +54,15 @@ class Basket {
         }
     }
 
-
-
+    /* Effacer un produit par l'id */
     remove(produitCanape) {
-
         this.produits = this.produits.filter(p => p.id != produitCanape.id && p.colors != produitCanape.colors);
         this.save();
         this.getTotalPrice();
         this.getTotalProduct();
     }
 
+    /* Change Qty par produit */
     changeQuantity(id, quantity, color) {
         console.log(id, quantity, color);
         // Recherche le meme ID sur le produitCanape qui vient d'être soumis à l'ajout du panier
@@ -78,6 +76,7 @@ class Basket {
         this.getTotalProduct();
     }
 
+    /* Calcul la qty */
     getNumberProduct() {
 
         let number = 0;
@@ -86,7 +85,8 @@ class Basket {
         }
         return number
     }
-
+    
+    /* Calcul le prix total */
     async getTotalPrice() {
 
         let total = 0;
@@ -99,6 +99,7 @@ class Basket {
     }
 
 
+    /* Calcul du prix total avec la qty */
     getTotalProduct() {
 
         let total = 0;
@@ -109,7 +110,7 @@ class Basket {
     }
 
 
-
+    /* Récupère le prix de l'article par l'id */
     getPriceByApi(id) {
         return fetch('http://localhost:3000/api/products/' + id)
             .then((resp) => resp.json())
@@ -118,7 +119,7 @@ class Basket {
             })
     }
 
-
+    /* Efface le contenu du localStorage (basket) */
     getDestroy(){
         let basket = localStorage.getItem("basket");
         basket.clear();

@@ -3,11 +3,7 @@ let cartHtml = document.getElementsByClassName('cart');
 
 
 function displayItemProduct(data, itemProduct){
-  console.log(itemProduct)
  
-
-  // boucle ? 
-
   let containerCard = document.createElement("article");
   containerCard.setAttribute("data-id", `${data._id}`)
   containerCard.classList.add("cart__item");
@@ -89,11 +85,6 @@ function displayItemProduct(data, itemProduct){
   containerCard.appendChild(cardItemContentSettings)
   containerCard.appendChild(cardItemContentSettingsDelete)
 
- 
-
-
-
-  
   cartHtml[0].appendChild(containerCard); 
 
 }
@@ -166,6 +157,8 @@ function updateItemQty(id, color){
  
  
 /* - - - - - - - - - - - -- - - - - - -  Formulaire de contact  - - - - - -- - - - - - - - - - - - -  */  
+
+// Récupère le formualire "contact"
 let submitOrder = document.forms.contact;
  
 submitOrder.addEventListener("submit", function (e) {
@@ -302,6 +295,7 @@ submitOrder.addEventListener("submit", function (e) {
       contact, products
     }
 
+    /* okToSend: Permet de vérifié si un champ est false, si false, l'envoie du formulaire est annulé */
     if(okToSend){
     try {
       const prom1 = fetch("http://localhost:3000/api/products/order", {
@@ -334,13 +328,5 @@ submitOrder.addEventListener("submit", function (e) {
 
 
 
-
-/* - - - - - - - - - - - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - - - - - - - -
-/* - - - - - - - - - - - - - - - - - - .deleteItem - - - - - - - - - - - - - - - - - - - - - - - - - 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
-
-const btnDeletes = document.querySelectorAll('.deleteItem');
-  for( let i = 0;i < btnDeletes.length; i++){
-        console.log("Hello dear")
-  }
+ 
       
