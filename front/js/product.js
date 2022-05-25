@@ -14,7 +14,7 @@ let titlePage = document.getElementsByTagName("title")[0];
 
 
 
-// En arrivant 
+ 
 // affichage d'un produit par id
 fetch("http://localhost:3000/api/products/" + search_articleId)
   .then((resp) => resp.json())

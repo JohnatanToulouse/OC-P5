@@ -1,44 +1,227 @@
 let cartHtml = document.getElementsByClassName('cart');
 
 
-
+/* Affichage du produit  en créant element HTML */
 function displayItemProduct(data, itemProduct){
  
+  // article
   let containerCard = document.createElement("article");
   containerCard.setAttribute("data-id", `${data._id}`)
   containerCard.classList.add("cart__item");
   containerCard.setAttribute("data-color", `${itemProduct.colors}`);
 
+  // .cart__item__img
   let cardImg = document.createElement("div");
   cardImg.classList.add("cart__item__img");
   
+  // création image, avec l'image du produit par l'API + alt au nom du produit.
   let imgCardItemProduct = document.createElement("img");
   imgCardItemProduct.setAttribute("alt", `${data.name}`);
   imgCardItemProduct.src = `${data.imageUrl}`;
 
+
+  // .cart__item__img récupère l'image du produit et la met dedans.
   cardImg.appendChild(imgCardItemProduct);
 
+  // article récupère .cart__item__img (l'image) et la met dedans. 
   containerCard.appendChild(cardImg);
 
+  // creation div .cart__item__content 
   let cardItemContent = document.createElement("div");
   cardItemContent.classList.add("cart__item__content");
 
+  // creation div .cart__item__content__description 
   let cardItemContentDescription = document.createElement("div");
   cardItemContentDescription.classList.add("cart__item__content__description");
+
+  // .cart__item__content récupère .cart__item__content__description et la met dedans.
+  cardItemContent.appendChild(cardItemContentDescription);
+
+  // article récupère .cart__item__content qui contient .cart__item__content__description (titre, couleur, prix) et l'intègre
+  containerCard.appendChild(cardItemContent);
 
   let h2CardItem = document.createElement("h2");
   let h2CardItemContent = document.createTextNode(`${data.name}`);
 
-  h2CardItem.appendChild(h2CardItemContent);
+ 
 
+  // h2 créée intégre le nom du produit via l'API
+  h2CardItem.appendChild(h2CardItemContent);
+  cardItemContentDescription.appendChild(h2CardItem);
+
+  // p contenant la couleur du produit
   let pCardItem = document.createElement("p");
   let pCardItemContent = document.createTextNode(`${itemProduct.colors}`);
 
+  // p contenant la valeur de la couleur du produit
+  pCardItem.appendChild(pCardItemContent);
+  cardItemContentDescription.appendChild(pCardItem);
 
+  // p créée et contenant le prix du produit
   let pPrice = document.createElement("p");
+
+  // p contenant la valeur du prix du produit
   let pPriceContent = document.createTextNode(`${data.price}  €`);
+  
+  // Liaison  P contient la valeur du prix;
+  pPrice.appendChild(pPriceContent);
+
+  // Liaison article contient la div du prix
+  cardItemContentDescription.appendChild(pPrice);
+
+
+
+  /**
+   * div class="cart__item__content__settings";
+   */
+
+  let cartItemContentSettings = document.createElement("div");
+  cartItemContentSettings.classList.add("cart__item__content__settings");
+
+  //cardItemContent.appendChild(cartItemContentSettings);
+  /**
+   * div class="cart__item__content__settings__quantity";
+   */
+ 
+  let cartItemContentSettingsQuantity = document.createElement("div");
+  cartItemContentSettingsQuantity.classList.add("cart__item__content__settings__quantity");
+
+
+  let pCardItemContentSettingsQty = document.createElement("p");
+  let pCardItemContentSettingsQtyContent = document.createTextNode(`Qté :`);
+ 
+  pCardItemContentSettingsQty.appendChild(pCardItemContentSettingsQtyContent);
+
+    cartItemContentSettings.appendChild(pCardItemContentSettingsQty);
+
+  // Liaison .cart__item__content__settings__quantity avec p 
+  cartItemContentSettingsQuantity.appendChild(pCardItemContentSettingsQty);
+
+// Liaison article contient la div.cart__item__content__settings
+cardItemContentDescription.appendChild(cartItemContentSettings);
+
+ // Liaison .cart__item__content avec .cart__item__content__settings__quantity 
+ cardItemContent.appendChild(cartItemContentSettingsQuantity);
+
+
+
+
+
+
+ 
+
+
+ let inputCardItemContentSettings = document.createElement("input");
+ inputCardItemContentSettings.setAttribute("type", "number");
+ inputCardItemContentSettings.setAttribute("name", "itemQuantity");
+ inputCardItemContentSettings.setAttribute("min", "1");
+ inputCardItemContentSettings.setAttribute("max", "100");
+ inputCardItemContentSettings.setAttribute("value", `${itemProduct.qty}`);
+ inputCardItemContentSettings.classList.add("itemQuantity");
+ inputCardItemContentSettings.setAttribute("onchange", `updateItemQty("${data._id}","${itemProduct.colors}")`);
+
+
+
+ cartItemContentSettingsQuantity.appendChild(inputCardItemContentSettings);
+
+
+
+
+    let cardItemContentSettingsDelete = document.createElement("div");
+    cardItemContentSettingsDelete.classList.add("cart__item__content__settings__delete");
+
+ cardItemContent.appendChild(cardItemContentSettingsDelete);
+
+
+    cartItemContentSettings.appendChild(cardItemContentSettingsDelete);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*
+ cardItemContentSettingsDelete.appendChild(pCardItemContentSettingsDelete);
+ 
+   
+ cartItemContentSettings.appendChild(cardItemContentSettingsDelete);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------------------------
+
+ 
+
+  /*
+
+  cardItemContent.appendChild(cardItemContentDescription);
+
+  
+console.log(h2CardItemContent)
+
+  
+  /*
+  h2CardItem.appendChild(h2CardItemContent);
+
+  cardItemContentDescription.appendChild(h2CardItem);
+
+// --------------------------------------------------------------------------------------------
+/*
+
+  
+
+  h2CardItem.appendChild(h2CardItemContent);
+
+  
+
+
+  
+
+/*
 
   pCardItem.appendChild(pCardItemContent);
+
 
 
   cardItemContentDescription.appendChild(h2CardItem);
@@ -52,38 +235,33 @@ function displayItemProduct(data, itemProduct){
   let cardItemContentSettings = document.createElement("div");
   let cardItemContentSettingsQty = document.createElement("div");
 
-  let pCardItemContentSettingsQty = document.createElement("p");
-  let pCardItemContentSettingsQtyContent = document.createTextNode(`Qté :`);
+  
 
-  pCardItemContentSettingsQty.appendChild(pCardItemContentSettingsQtyContent);
+  //---
 
-  let inputCardItemContentSettings = document.createElement("input");
-  inputCardItemContentSettings.setAttribute("type", "number");
-  inputCardItemContentSettings.setAttribute("name", "itemQuantity");
-  inputCardItemContentSettings.setAttribute("min", "1");
-  inputCardItemContentSettings.setAttribute("max", "100");
-  inputCardItemContentSettings.setAttribute("value", `${itemProduct.qty}`);
-  inputCardItemContentSettings.classList.add("itemQuantity");
-  inputCardItemContentSettings.setAttribute("onchange", `updateItemQty("${data._id}","${itemProduct.colors}")`);
+  
 
 
-  let cardItemContentSettingsDelete = document.createElement("div");
-  cardItemContentSettingsDelete.classList.add("cart__item__content__settings__delete");
+  
 
 
-  let pCardItemContentSettingsDelete = document.createElement("p");
-  pCardItemContentSettingsDelete.classList.add("deleteItem");
-  pCardItemContentSettingsDelete.textContent = "Supprimer";
-  pCardItemContentSettingsDelete.setAttribute("onclick", `deleteItemToBasket("${data._id}","${itemProduct.colors}")`);
-   
 
-  cardItemContentSettingsDelete.appendChild(pCardItemContentSettingsDelete);
+  
+*/
 
-  cardItemContentSettings.appendChild(cardItemContentSettingsQty);
-  cardItemContentSettings.appendChild(inputCardItemContentSettings);
 
-  containerCard.appendChild(cardItemContentSettings)
-  containerCard.appendChild(cardItemContentSettingsDelete)
+
+
+
+
+
+
+
+
+
+
+
+
 
   cartHtml[0].appendChild(containerCard); 
 
@@ -92,10 +270,10 @@ function displayItemProduct(data, itemProduct){
 
 
 /* - - - - - - - - - - - -- - - - - - -  Affichage du localStorage  - - - - - -- - - - - - - - - - - - -  */
-/* - - - - - - - - - - - -- - - - - - -- - -  Afficher dans .cart  -- - - - - - - -- - - - - - - - - - -  */
- // Initialisation d'un tableau vide
+// Initialisation d'un tableau vide
  let products = [];
 
+ 
 let panierBasket = localStorage.getItem("basket");
  panierBasket = JSON.parse(panierBasket);
 

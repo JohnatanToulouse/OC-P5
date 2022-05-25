@@ -5,7 +5,7 @@
  let sectionItems = document.querySelector('section');
  
 
-// functions:
+
 // affichages de tous les canapés
 function showCanapes(canape){
      // créé un element lien 
