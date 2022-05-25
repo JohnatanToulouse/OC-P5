@@ -14,17 +14,19 @@ function displayItemProduct(data, itemProduct){
   let cardImg = document.createElement("div");
   cardImg.classList.add("cart__item__img");
   
-  // création image, avec l'image du produit par l'API + alt au nom du produit.
+  // image
   let imgCardItemProduct = document.createElement("img");
   imgCardItemProduct.setAttribute("alt", `${data.name}`);
   imgCardItemProduct.src = `${data.imageUrl}`;
 
 
-  // .cart__item__img récupère l'image du produit et la met dedans.
+  
   cardImg.appendChild(imgCardItemProduct);
 
-  // article récupère .cart__item__img (l'image) et la met dedans. 
+  // Liaison et intégration de l'article englobant la div class="cardImg" 
   containerCard.appendChild(cardImg);
+
+  
 
   // creation div .cart__item__content 
   let cardItemContent = document.createElement("div");
@@ -71,198 +73,66 @@ function displayItemProduct(data, itemProduct){
 
 
 
-  /**
-   * div class="cart__item__content__settings";
-   */
+  // div class="cart__item__content__settings ---------------------------------------------------------------------------------------------------
 
   let cartItemContentSettings = document.createElement("div");
   cartItemContentSettings.classList.add("cart__item__content__settings");
 
-  //cardItemContent.appendChild(cartItemContentSettings);
-  /**
-   * div class="cart__item__content__settings__quantity";
-   */
- 
+  //Liaison article avec div cart__item__content__settings
+  cardItemContent.appendChild(cartItemContentSettings);
+
+
+  // div class="cart__item__content__settings__quantity ------------------------------------------------------------------------------------------
+
   let cartItemContentSettingsQuantity = document.createElement("div");
   cartItemContentSettingsQuantity.classList.add("cart__item__content__settings__quantity");
 
+  //Liaison article avec div cart__item__content__settings__quantity
+  cartItemContentSettings.appendChild(cartItemContentSettingsQuantity);
 
+ // création d'un element P avec en valeur le texte "Qté"
   let pCardItemContentSettingsQty = document.createElement("p");
   let pCardItemContentSettingsQtyContent = document.createTextNode(`Qté :`);
- 
-  pCardItemContentSettingsQty.appendChild(pCardItemContentSettingsQtyContent);
 
-    cartItemContentSettings.appendChild(pCardItemContentSettingsQty);
+  // Liaison, le parent p récupère et intègre dans son html le contenu.
+  cartItemContentSettingsQuantity.appendChild(pCardItemContentSettingsQtyContent);
 
-  // Liaison .cart__item__content__settings__quantity avec p 
-  cartItemContentSettingsQuantity.appendChild(pCardItemContentSettingsQty);
 
-// Liaison article contient la div.cart__item__content__settings
-cardItemContentDescription.appendChild(cartItemContentSettings);
+  // création input
+  let inputCardItemContentSettings = document.createElement("input");
+  inputCardItemContentSettings.setAttribute("type", "number");
+  inputCardItemContentSettings.setAttribute("name", "itemQuantity");
+  inputCardItemContentSettings.setAttribute("min", "1");
+  inputCardItemContentSettings.setAttribute("max", "100");
+  inputCardItemContentSettings.setAttribute("value", `${itemProduct.qty}`);
+  inputCardItemContentSettings.classList.add("itemQuantity");
+  inputCardItemContentSettings.setAttribute("onchange", `updateItemQty("${data._id}","${itemProduct.colors}")`);
 
- // Liaison .cart__item__content avec .cart__item__content__settings__quantity 
- cardItemContent.appendChild(cartItemContentSettingsQuantity);
+  // liaison p qté à .cart__item__content__settings__quantity
+  cartItemContentSettings.appendChild(pCardItemContentSettingsQty);
+  cartItemContentSettingsQuantity.appendChild(inputCardItemContentSettings);
 
 
+// div class="cart__item__content__settings__delete" ----------------------------------------------------------------------------------------------
 
-
-
-
- 
-
-
- let inputCardItemContentSettings = document.createElement("input");
- inputCardItemContentSettings.setAttribute("type", "number");
- inputCardItemContentSettings.setAttribute("name", "itemQuantity");
- inputCardItemContentSettings.setAttribute("min", "1");
- inputCardItemContentSettings.setAttribute("max", "100");
- inputCardItemContentSettings.setAttribute("value", `${itemProduct.qty}`);
- inputCardItemContentSettings.classList.add("itemQuantity");
- inputCardItemContentSettings.setAttribute("onchange", `updateItemQty("${data._id}","${itemProduct.colors}")`);
-
-
-
- cartItemContentSettingsQuantity.appendChild(inputCardItemContentSettings);
-
-
-
-
-    let cardItemContentSettingsDelete = document.createElement("div");
-    cardItemContentSettingsDelete.classList.add("cart__item__content__settings__delete");
-
- cardItemContent.appendChild(cardItemContentSettingsDelete);
-
-
-    cartItemContentSettings.appendChild(cardItemContentSettingsDelete);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /*
- cardItemContentSettingsDelete.appendChild(pCardItemContentSettingsDelete);
- 
-   
- cartItemContentSettings.appendChild(cardItemContentSettingsDelete);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------------------------------------------------------------------
-
- 
-
-  /*
-
-  cardItemContent.appendChild(cardItemContentDescription);
+  // création d'un element div classé .cart__item__content__settings__delete
+  let cardItemContentSettingsDelete = document.createElement("div");
+  cardItemContentSettingsDelete.classList.add("cart__item__content__settings__delete");
 
   
-console.log(h2CardItemContent)
+  // Liaison .cart__item__content__settings__quantity à .cart__item__content__settings__delete
+  cartItemContentSettings.appendChild(cardItemContentSettingsDelete);
 
-  
-  /*
-  h2CardItem.appendChild(h2CardItemContent);
+  // Création button avec parametres 
+  let pCardItemContentSettingsDelete = document.createElement("p");
+  pCardItemContentSettingsDelete.classList.add("deleteItem");
+  pCardItemContentSettingsDelete.textContent = "Supprimer";
+  pCardItemContentSettingsDelete.setAttribute("onclick", `deleteItemToBasket("${data._id}","${itemProduct.colors}")`);
 
-  cardItemContentDescription.appendChild(h2CardItem);
+  // Liaison et inégration de la div .cart__item__content__settings__delete à pCardItemContentSettingsDelete 
+  cardItemContentSettingsDelete.appendChild(pCardItemContentSettingsDelete);
 
-// --------------------------------------------------------------------------------------------
-/*
-
-  
-
-  h2CardItem.appendChild(h2CardItemContent);
-
-  
-
-
-  
-
-/*
-
-  pCardItem.appendChild(pCardItemContent);
-
-
-
-  cardItemContentDescription.appendChild(h2CardItem);
-  cardItemContentDescription.appendChild(pCardItemContent);
-
-
-  cardItemContent.appendChild(cardItemContentDescription);
-
-  containerCard.appendChild(cardItemContent)
-
-  let cardItemContentSettings = document.createElement("div");
-  let cardItemContentSettingsQty = document.createElement("div");
-
-  
-
-  //---
-
-  
-
-
-  
-
-
-
-  
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // Liaison et intégration de la balise article .cart__item à la section classée .cart
   cartHtml[0].appendChild(containerCard); 
 
 }
@@ -501,10 +371,4 @@ submitOrder.addEventListener("submit", function (e) {
     alert("Problème lors de la validation du formulaire");
   }
 });
-
- 
-
-
-
- 
-      
+  
